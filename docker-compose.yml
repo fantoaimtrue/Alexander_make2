@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_PASSWORD: ${PGPASSWORDD}
+      POSTGRES_DB: ${DATABASE}
+      POSTGRES_USER: ${PGUSER}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: on-failure
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+  bot:
+    build: bot
+    command: sh -c "python app.py"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  pgdata:

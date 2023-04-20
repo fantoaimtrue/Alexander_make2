@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:11-alpine
     environment:
-      POSTGRES_PASSWORD: ${PGPASSWORDD}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
       POSTGRES_DB: ${DATABASE}
       POSTGRES_USER: ${PGUSER}
     volumes:
